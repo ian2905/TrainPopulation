@@ -87,17 +87,27 @@ namespace TrainPopulation
                             {
                                 if (rand.Next(0, 3) == 0)
                                 {
-                                    foreach (Passenger P in n.Passengers)
+                                    Dictionary<Passenger, Car> departingPasssengers = new Dictionary<Passenger, Car>();
+                                    foreach (Passenger p in n.Passengers)
                                     {//we have to go deeper
                                         if (rand.Next(0, 2) == 0)
                                         {
                                             int carChoice = rand.Next(0, t.Cars.Count);
                                             if (t.Cars[carChoice].Passengers.Count < t.Cars[carChoice].PassengerCapacity)
                                             {//why am i so bad at programming
-                                                Location arrivalLocation = n.Edges.Keys.ElementAt(rand.Next(0, n.Edges.Keys.Count));
-                                                routes.Add(insertRoute(connectionString, new Route(routes.Count + 1, t.TrainID, n.Location, arrivalLocation, date, n.Edges[arrivalLocation])));
+                                                //this all probably needs some comments
+                                                departingPasssengers.Add(p, t.Cars[carChoice]);
                                             }
                                         }
+                                    }
+                                    Location arrivalLocation = n.Edges.Keys.ElementAt(rand.Next(0, n.Edges.Keys.Count));
+                                    Route newRoute = new Route(routes.Count + 1, t.TrainID, n.Location, arrivalLocation, date, n.Edges[arrivalLocation]);
+                                    routes.Add(insertRoute(connectionString, newRoute));
+
+                                    for(int i = 0; i < departingPasssengers.Count; i++)
+                                    {
+                                        //yall want some long varible names
+                                        passengerRoutes.Add(insertPassengerRoute(connectionString, new PassengerRoute(passengerRoutes.Count + 1, departingPasssengers.Keys.ElementAt(i).PassengerID, newRoute.RouteID, departingPasssengers.Values.ElementAt(1).CarID, departingPasssengers.Values.ElementAt(1).TicketPrice)));
                                     }
                                 }
                             }
