@@ -1,0 +1,84 @@
+﻿Güssing|2
+	Bontang|80
+	Minitonas|75
+Minitonas|4
+	Güssing|75
+	Woodstock|180
+	Nandyal|450
+	HŽvillers|150
+Bontang|3
+	Güssing|80
+	Villahermosa|130
+	HŽvillers|260
+Woodstock|3
+	Minitonas|180
+	HŽvillers|145
+	Pomarolo|300
+Villahermosa|2
+	Bontang|130
+	Innisfail|240
+Pomarolo|4
+	Woodstock|300
+	Nandyal|187
+	Bolhe|210
+	Selkirk|184
+Essex|4
+	HŽvillers|145
+	Pakpatan|198
+	Bolhe|250
+	Brodick|268
+Innisfail|3
+	Villahermosa|240
+	Brodick|180
+	Morvi|210
+HŽvillers|5
+	Bontang|260
+	Minitonas|250
+	Woodstock|145
+	Brodick|260
+	Essex|145
+Brodick|4
+	Innisfail|180
+	HŽvillers|260
+	Essex|268
+	Morvi|180
+Morvi|4
+	Innisfail|210
+	Brodick|180
+	Yeovil|325
+	Portsmouth|114
+Yeovil|2
+	Morvi|325
+	Rhayader|500
+Portsmouth|4
+	Morvi|114
+	Rhayader|250
+	Pakpatan|155
+	Wilskerke|175
+Pakpatan|3
+	Portsmouth|155
+	Essex|198
+	Wilskerke|145
+Nandyal|3
+	Selkirk|195
+	Pomarolo|187
+	Minitonas|450
+Selkirk|2
+	Nandyal|195
+	Pomarolo|184
+Bolhe|3
+	Pomarolo|210
+	Essex|250
+	Wilskerke|166
+Wilskerke|4
+	Bolhe|166
+	Pakpatan|145
+	Portsmouth|175
+	GrandManil|350
+GrandManil|2
+	Wilskerke|350
+	Rhayader|460
+Rhayader|3
+	GrandManil|460
+	Portsmouth|250
+	Yeovil|500

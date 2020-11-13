@@ -1,0 +1,104 @@
+﻿NOTE: ACTUAL FILE IN bin\debug
+------------------------------------------
+
+|Name|Company|Driver|BaseSpeed|CarCapacity
+Dakota Express|Proin Non Massa Ltd|Jana Curry|85|12
+Dakotan|Proin Non Massa Ltd|Aiko Osborn|85|15
+Day Express|Proin Non Massa Ltd|Claire Valencia|114|14
+Daylight Express|Faucibus Morbi Industries|Dacey Mcbride|147|11
+Denver Zephyr|Vehicula Et Foundation|Fatima Glenn|140|11
+Detroit Express|Gravida Company|Perry Barrera|77|11
+Dixieland|Gravida Company|Lois Glass|141|12
+East Coast Flyer|Convallis Institute|Lysandra Dorsey|102|21
+Early Bird|Gravida Company|Gillian Rivers|76|23
+Eagle|Nam Nulla PC|Jaquelyn Pate|96|11
+Eastern Mail|Et Institute|Miranda Dunlap|90|12
+El Capitan|Gravida Company|Urielle Shepherd|103|23
+Egyptian Zipper|Elit Erat Corporation|Vanna Sweet|140|10
+Embassy|Luctus PC|Vivien Ruiz|118|12
+Empire Builder|Gravida Company|Claudia Adkins|75|11
+Evening Keystone|Mi Ac Mattis Company|Otto Golden|138|19
+Fairfield|Enim Commodo Associates|Kennan Martin|110|10
+Fast Mail|Tellus Eu Augue Associates|Tatyana Cox|88|22
+Fast Western Express|Gravida Company|Burton Duke|79|24
+Fifth Avenue Special|Gravida Company|Ashton Gibbs|148|25
+Fisherman's Special|Adipiscing Elit Incorporated|Darryl Mcdonald|130|15
+Florida Limited|Facilisis Vitae Orci LLC|Bree Hunter|108|11
+Florida Arrow|Duis Ac Arcu Inc.|Tucker Pugh|91|17
+Floridian|Sociis Natoque Limited|Nash Webster|111|24
+Fort Dearborn|Porttitor Eros Industries|Sheila Riddle|94|10
+George Washington|Sociis Natoque Limited|Cooper Love|118|18
+Gilt Edge|Consectetuer Ipsum Consulting|Phyllis Spence|113|18
+Gold Coast|Posuere At Consulting|Hashim Kent|111|22
+Grand Rapids Express|Faucibus Lectus Consulting|Diana Petty|110|16
+Great Valley Flyer|Curae; Donec Associates|Jasper Hardy|127|11
+Gulf Breeze|Convallis Ante Lectus Institute|Chaim Cole|112|16
+Gulf Coast Limited|Nunc Sed Libero PC|Ralph Velazquez|92|11
+Gulf Coast Rebel|Orci Incorporated|Grace Acevedo|112|18
+Gulf Wind|Vitae Orci Phasellus Company|Ezekiel Huffman|84|24
+Hartford Line Express|A Associates|Violet Solomon|106|15
+Hawkeye|Sociis Natoque Limited|Tatyana Reeves|78|11
+Henry M. Flagler|Vitae Erat Associates|Inga Rollins|101|12
+Hiawatha|Dui Incorporated|Rina Mcbride|78|17
+Housatonic Express|Sociis Natoque Limited|Michelle Cooke|84|11
+Hub|Phasellus Libero Mauris Industries|Macon Norton|110|15
+Hummer|Eu Tellus Institute|Thaddeus Hardy|93|20
+Humming Bird|Pharetra Institute|Colleen Randolph|150|17
+Hustler|Varius Institute|Naida Black|81|18
+Idahoan|Vitae Industries|Quon Byrd|100|17
+Independence|Arcu Foundation|Vance Owen|93|17
+Iowa Express|Tellus Justo Inc.|Price Pugh|118|21
+Iron Range Express|Felis Ullamcorper Viverra Incorporated|Linus Henson|132|13
+Islander|Augue Sed Corporation|Levi Tyson|82|17
+James River|Sociis Natoque Limited|Ezekiel Oliver|104|13
+John Adams|Sociis Natoque Limited|Dustin Buckner|96|18
+John Quincy Adams|Consectetuer Adipiscing Inc.|Caryn Guerrero|141|25
+Juniata|Risus Quisque Limited|Colton Bernard|82|12
+Kansas City Chief|Erat Consulting|Josiah Frost|117|16
+Kansas City Express|Tempor Diam Dictum Company|Kerry Park|87|21
+Kansas City Special|Sed Ltd|Bruno Marks|85|22
+Katy Flyer|Dui Foundation|Jeremy Strong|147|10
+Keystone Express|Hendrerit LLP|Nolan Moore|127|10
+Klamath|Orci Phasellus Inc.|Merritt Shelton|121|14
+La Salle|Dis Parturient Institute|Haley Nunez|121|10
+Lake Erie|Aliquet Lobortis Nisi Institute|Jamal Sawyer|128|12
+Land O'Corn|Magna Suspendisse Tristique Corp.|Alexandra Blackburn|138|24
+Lark|Sagittis Lobortis Mauris Institute|Tanisha Dalton|115|11
+Laurentian|Felis Corporation|Victoria Watson|135|21
+Legislator|Phasellus PC|Isabella Mccarty|144|17
+Lexington Special|Ligula Consectetuer Rhoncus Industries|Otto Barry|120|19
+Lincoln Service|Cum Sociis Natoque Inc.|Zahir Edwards|127|24
+Lone Star|Mollis Corporation|Lawrence Peck|93|20
+Los Angeles Express|Nunc Ac Mattis PC|Tate Durham|96|11
+Louisiane|Mi Ac Mattis Corporation|Theodore Lang|132|10
+Mahaiwe|Velit Quisque Limited|Ifeoma Perkins|75|23
+Mahkeenac|Ante Limited|Avram Sweeney|137|19
+Mainstreeter|Quisque Consulting|Michelle Travis|130|20
+Marathon|Curae Consulting|Haley Rivas|97|17
+Mariner|Lacus Institute|Levi Ramirez|103|11
+Matinee|Nonummy Ut Molestie LLP|Omar Waller|146|15
+Mercury|Tempor Est Ac Associates|Josiah Watkins|105|11
+Michigan|Maecenas Limited|Tate Bridges|132|13
+Midnight|Facilisis Consulting|Denise Mclean|76|21
+Minute Man|Elit Pretium Et Limited|Gloria Finley|98|24
+Missionary|Ridiculus Mus Company|Heidi Erickson|87|24
+Mondamin|Neque Ltd|Ferris Becker|113|13
+Mount Royal|Est Industries|Rebecca Lewis|81|14
+Narragansett|Et Netus Ltd|Robin Elliott|120|24
+Nellie Bly|Mauris Molestie Foundation|Hamilton Tanner|109|19
+Nightingale|Imperdiet Inc.|Rogan Terrell|138|12
+North Penn|Ac Consulting|Quinn Blevins|105|11
+Northeastern Limited|Nec Urna Inc.|Hakeem Key|138|23
+Number Six|Accumsan Convallis Ltd|Ignatius Hays|75|11
+Oakland Lark|Diam Inc.|Liberty Gross|107|14
+Ohioan|Phasellus Corporation|Hope Marshall|117|25
+Oneida|Mus LLC|Lunea Castillo|95|17
+Onondaga|Nunc Quisque Industries|Leroy Maldonado|142|12
+Oregonian|Arcu Curabitur Ut Ltd|Cynthia Mccoy|75|13
+Owl|Nec Tellus Ltd|Echo Hayden|102|15
+Palisades|Risus Nulla Eget Limited|Isaiah Blanchard|118|24
+Palmetto|Purus Ac Tellus Associates|Yardley Kane|120|12
+Patroon|Quam Quis Company|Brooke Odonnell|122|18
+Paul Revere|Non Arcu Ltd|Paul Parker|79|10
+Pawling Express|Sed Dictum Eleifend Corporation|Uma Roy|88|23
+Peninsular|Cras Corp.|Robin Hooper|122|21
