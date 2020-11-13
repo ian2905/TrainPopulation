@@ -16,6 +16,7 @@ namespace TrainPopulation.Models
         public int CarCapacity { get; }
         public int InTransit { get; set; }
         public List<Car> Cars { get; set; }
+        public Location CurrentLocation { get; set; }
 
         public Train(int trainID, string name, string company, string driver, int baseSpeed, int carCapacity)
         {
@@ -46,6 +47,11 @@ namespace TrainPopulation.Models
             {
                 InTransit = 0;
             }
+        }
+
+        public void assignStartLocation(Location l)
+        {
+            CurrentLocation = l;
         }
     }
 }

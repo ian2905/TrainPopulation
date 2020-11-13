@@ -13,7 +13,7 @@
  *      number 1-100. If it is 3 or less, do nothing. If it is 98 or
  *      greater, subtract 2 to travel. Otherwise, subtract 1 from travel.
  * 3.   Check if any trains have 0 in their travel value. If that is the case
- *      put that train and all passengers on that train into the location.
+ *      put all passengers on that train into the location.
  *      Update the Route to add in the arrival time.
  * 4.   Repeat until a years worth of minutes have passed.
  * 
@@ -48,7 +48,7 @@ namespace TrainPopulation
             List<Route> routes = new List<Route>();
             List<PassengerRoute> passengerRoutes = new List<PassengerRoute>();
 
-            List<Node> nodes = new List<Node>();
+            List<Node> nodes;
 
             //Create train, car, and passenger tables
             trains = createTrains(connectionString);
@@ -64,6 +64,10 @@ namespace TrainPopulation
             {
                 p.assignStartLocation((Location)rand.Next(0, 20));
             }
+            foreach (Train t in trains)
+            {
+                t.assignStartLocation((Location)rand.Next(0, 20));
+            }
 
             //Populate Graph
             nodes = populateGraph();
@@ -71,16 +75,17 @@ namespace TrainPopulation
             addPassengersToNodes(nodes, passengers);
 
 
-
+            //for the year of 2019
             while (date.Year != 2020)
             {
+                //if it is a departure time
                 if( (date.Hour == 8  && date.Minute == 0) ||
                     (date.Hour == 12 && date.Minute == 0) ||
                     (date.Hour == 16 && date.Minute == 0) ||
                     (date.Hour == 20 && date.Minute == 0))
                 {
                     foreach (Node n in nodes)
-                    {//ooo it nest time
+                    {
                         foreach (Train t in n.Trains)
                         {
                             if (t.InTransit == 0)
@@ -89,26 +94,89 @@ namespace TrainPopulation
                                 {
                                     Dictionary<Passenger, Car> departingPasssengers = new Dictionary<Passenger, Car>();
                                     foreach (Passenger p in n.Passengers)
-                                    {//we have to go deeper
+                                    {
                                         if (rand.Next(0, 2) == 0)
                                         {
                                             int carChoice = rand.Next(0, t.Cars.Count);
+                                            //randomly choose one of the cars in that particular train and see if it has open seats
                                             if (t.Cars[carChoice].Passengers.Count < t.Cars[carChoice].PassengerCapacity)
                                             {//why am i so bad at programming
-                                                //this all probably needs some comments
                                                 departingPasssengers.Add(p, t.Cars[carChoice]);
                                             }
                                         }
                                     }
+                                    //Create the Route object for the train's journey and insert it into the database
                                     Location arrivalLocation = n.Edges.Keys.ElementAt(rand.Next(0, n.Edges.Keys.Count));
                                     Route newRoute = new Route(routes.Count + 1, t.TrainID, n.Location, arrivalLocation, date, n.Edges[arrivalLocation]);
                                     routes.Add(insertRoute(connectionString, newRoute));
 
+                                    //set the trains travel distance
+                                    t.InTransit = newRoute.Distance;
+
                                     for(int i = 0; i < departingPasssengers.Count; i++)
                                     {
+                                        //create a PassengerRoute object for each departingPassenger, then remove the passenger from the location
                                         //yall want some long varible names
-                                        passengerRoutes.Add(insertPassengerRoute(connectionString, new PassengerRoute(passengerRoutes.Count + 1, departingPasssengers.Keys.ElementAt(i).PassengerID, newRoute.RouteID, departingPasssengers.Values.ElementAt(1).CarID, departingPasssengers.Values.ElementAt(1).TicketPrice)));
+                                        PassengerRoute newPR = new PassengerRoute(passengerRoutes.Count + 1, departingPasssengers.Keys.ElementAt(i).PassengerID, newRoute.RouteID, departingPasssengers.Values.ElementAt(1).CarID, departingPasssengers.Values.ElementAt(1).TicketPrice);
+                                        passengerRoutes.Add(insertPassengerRoute(connectionString, newPR));
+                                        n.Passengers.RemoveAt(n.Passengers.IndexOf(departingPasssengers.Keys.ElementAt(i)));
                                     }
+                                    //set the trains travel distance
+                                    t.InTransit = newRoute.Distance;
+
+                                    //add the train to the desination node and remove it from the current node
+                                    foreach(Node no in nodes)
+                                    {
+                                        if(no.Location == newRoute.ArrivalLocation)
+                                        {
+                                            no.Trains.Add(t);
+                                            t.CurrentLocation = no.Location;
+                                        }
+                                    }
+                                    n.Trains.RemoveAt(n.Trains.IndexOf(t));
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                //Advance each train on their paths and check to see if they have arrived.
+                //This is done after the departure check because it would be weird for people to instantly leave a place they just arrived at
+                foreach(Train t in trains)
+                {
+                    t.Advance();
+                    if(t.InTransit == 0)
+                    {
+                        for(int i = 0; i < routes.Count; i++)
+                        {
+                            if(routes[i].TrainID == t.TrainID)
+                            {
+                                updateRoute(connectionString, routes[i], date);
+                                break;
+                            }
+                        }
+
+                        int index = -1;
+                        for (int i = 0; i < nodes.Count; i++)
+                        {
+                            if(nodes[i].Location == t.CurrentLocation)
+                            {
+                                index = i;
+                                break;
+                            }
+                        }
+                        foreach(Car c in t.Cars)
+                        {
+                            foreach(Passenger p in c.Passengers)
+                            {
+                                if(index != -1)
+                                {
+                                    nodes[index].Passengers.Add(p);
+                                }
+                                else
+                                {
+                                    throw new System.ArgumentException("Missing or incorrect Location");
                                 }
                             }
                         }
@@ -169,7 +237,6 @@ namespace TrainPopulation
             }
             return newTrains;
         }
-
 
         public static List<Car> createCars(string connectionString, Train t, int carID)
         {
@@ -363,6 +430,27 @@ namespace TrainPopulation
                 }
             }
             return passengerRoute;
+        }
+
+        public static void updateRoute(string connectionString, Route route, DateTimeOffset date)
+        {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                string sqlRequest = "UPDATE Trains.[Route] " +
+                                    "SET ArrivalTime = @ArrivalTime " +
+                                    "WHERE RouteID = @RouteID";
+                using (var command = new SqlCommand(sqlRequest, connection))
+                {
+                    command.Parameters.Add("@ArrivalTime", System.Data.SqlDbType.DateTimeOffset);
+                    command.Parameters.Add("@RouteID", System.Data.SqlDbType.Int);
+
+                    command.Parameters["@ArrivalTime"].Value = date;
+                    command.Parameters["@RouteID"].Value = route.RouteID;
+
+                    command.ExecuteNonQuery();
+                }
+            }
         }
     }
 }
