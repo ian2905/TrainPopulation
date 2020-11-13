@@ -38,6 +38,8 @@ namespace TrainPopulation
         static void Main(string[] args)
         {
             Random rand = new Random();
+            int month = 1;
+            int day = 1;
             int carID = 1;
             DateTimeOffset date = new DateTimeOffset(2019, 1, 1, 0, 0, 0, new TimeSpan(0, 0, 0));
 
@@ -78,17 +80,28 @@ namespace TrainPopulation
             //for the year of 2019
             while (date.Year != 2020)
             {
+                if(date.Month > month)
+                {
+                    Console.WriteLine(date.Month);
+                    month = date.Month;
+                }
+                if (date.Day > day)
+                {
+                    Console.WriteLine(date.Day);
+                    day = date.Day;
+                }
+
                 //if it is a departure time
-                if( (date.Hour == 8  && date.Minute == 0) ||
-                    (date.Hour == 12 && date.Minute == 0) ||
-                    (date.Hour == 16 && date.Minute == 0) ||
-                    (date.Hour == 20 && date.Minute == 0))
+                if ( (date.Hour == 7  && date.Minute == 0) ||
+                    (date.Hour == 11 && date.Minute == 0) ||
+                    (date.Hour == 15 && date.Minute == 0) ||
+                    (date.Hour == 19 && date.Minute == 0))
                 {
                     foreach (Node n in nodes)
                     {
                         foreach (Train t in n.Trains)
                         {
-                            if (t.InTransit == 0)
+                            if (!t.InTransit)
                             {
                                 if (rand.Next(0, 3) == 0)
                                 {
@@ -110,19 +123,17 @@ namespace TrainPopulation
                                     Route newRoute = new Route(routes.Count + 1, t.TrainID, n.Location, arrivalLocation, date, n.Edges[arrivalLocation]);
                                     routes.Add(insertRoute(connectionString, newRoute));
 
-                                    //set the trains travel distance
-                                    t.InTransit = newRoute.Distance;
-
                                     for(int i = 0; i < departingPasssengers.Count; i++)
                                     {
                                         //create a PassengerRoute object for each departingPassenger, then remove the passenger from the location
                                         //yall want some long varible names
-                                        PassengerRoute newPR = new PassengerRoute(passengerRoutes.Count + 1, departingPasssengers.Keys.ElementAt(i).PassengerID, newRoute.RouteID, departingPasssengers.Values.ElementAt(1).CarID, departingPasssengers.Values.ElementAt(1).TicketPrice);
+                                        PassengerRoute newPR = new PassengerRoute(passengerRoutes.Count + 1, departingPasssengers.Keys.ElementAt(i).PassengerID, newRoute.RouteID, departingPasssengers.Values.ElementAt(i).CarID, departingPasssengers.Values.ElementAt(i).TicketPrice);
                                         passengerRoutes.Add(insertPassengerRoute(connectionString, newPR));
                                         n.Passengers.RemoveAt(n.Passengers.IndexOf(departingPasssengers.Keys.ElementAt(i)));
                                     }
                                     //set the trains travel distance
-                                    t.InTransit = newRoute.Distance;
+                                    t.Distance = newRoute.Distance;
+                                    t.InTransit = true;
 
                                     //add the train to the desination node and remove it from the current node
                                     foreach(Node no in nodes)
@@ -146,7 +157,7 @@ namespace TrainPopulation
                 foreach(Train t in trains)
                 {
                     t.Advance();
-                    if(t.InTransit == 0)
+                    if(t.InTransit && t.Distance == 0)
                     {
                         for(int i = 0; i < routes.Count; i++)
                         {
@@ -180,9 +191,9 @@ namespace TrainPopulation
                                 }
                             }
                         }
+                        t.InTransit = false;
                     }
                 }
-
                 date = date.AddMinutes(1);
             }
         }
@@ -412,7 +423,7 @@ namespace TrainPopulation
             using (var connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                string sqlRequest = "INSERT TrainsCar(PassengerID, CarID, RouteID, TicketPrice) " +
+                string sqlRequest = "INSERT Trains.PassengerRoute(PassengerID, CarID, RouteID, TicketPrice) " +
                                     "VALUES(@PassengerID, @CarID, @RouteID, @TicketPrice)";
                 using (var command = new SqlCommand(sqlRequest, connection))
                 {
@@ -438,7 +449,9 @@ namespace TrainPopulation
             {
                 connection.Open();
                 string sqlRequest = "UPDATE Trains.[Route] " +
-                                    "SET ArrivalTime = @ArrivalTime " +
+                                    "SET " +
+                                    "ArrivalTime = @ArrivalTime, " +
+                                    "UpdatedOn = SYSDATETIMEOFFSET() " +
                                     "WHERE RouteID = @RouteID";
                 using (var command = new SqlCommand(sqlRequest, connection))
                 {

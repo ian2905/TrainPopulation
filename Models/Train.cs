@@ -14,7 +14,8 @@ namespace TrainPopulation.Models
         public string Driver { get; }
         public int BaseSpeed { get; }
         public int CarCapacity { get; }
-        public int InTransit { get; set; }
+        public bool InTransit { get; set; }
+        public int Distance { get; set; }
         public List<Car> Cars { get; set; }
         public Location CurrentLocation { get; set; }
 
@@ -26,7 +27,7 @@ namespace TrainPopulation.Models
             Driver = driver;
             BaseSpeed = baseSpeed;
             CarCapacity = carCapacity;
-            InTransit = 0;
+            InTransit = false;
             Cars = new List<Car>();
         }
 
@@ -36,16 +37,16 @@ namespace TrainPopulation.Models
             int rando = rand.Next(0, 100);
             if(rando >= 97)
             {
-                InTransit -= 2;
+                Distance -= 2;
             }
             else if(rando > 2)
             {
-                InTransit--;
+                Distance--;
             }
 
-            if (InTransit < 0)
+            if (Distance < 0)
             {
-                InTransit = 0;
+                Distance = 0;
             }
         }
 
