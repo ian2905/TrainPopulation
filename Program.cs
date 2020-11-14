@@ -115,6 +115,7 @@ namespace TrainPopulation
                                             if (t.Cars[carChoice].Passengers.Count < t.Cars[carChoice].PassengerCapacity)
                                             {//why am i so bad at programming
                                                 departingPasssengers.Add(p, t.Cars[carChoice]);
+                                                t.Cars[carChoice].Passengers.Add(p);
                                             }
                                         }
                                     }
@@ -140,8 +141,9 @@ namespace TrainPopulation
                                     {
                                         if(no.Location == newRoute.ArrivalLocation)
                                         {
-                                            no.Trains.Add(t);
                                             t.CurrentLocation = no.Location;
+                                            no.Trains.Add(t);
+                                            break;
                                         }
                                     }
                                     n.Trains.RemoveAt(n.Trains.IndexOf(t));
@@ -154,44 +156,32 @@ namespace TrainPopulation
 
                 //Advance each train on their paths and check to see if they have arrived.
                 //This is done after the departure check because it would be weird for people to instantly leave a place they just arrived at
-                foreach(Train t in trains)
+                foreach(Node n in nodes)
                 {
-                    t.Advance();
-                    if(t.InTransit && t.Distance == 0)
+                    foreach (Train t in n.Trains)
                     {
-                        for(int i = 0; i < routes.Count; i++)
+                        t.Advance();
+                        if (t.InTransit && t.Distance == 0)
                         {
-                            if(routes[i].TrainID == t.TrainID)
+                            for (int i = 0; i < routes.Count; i++)
                             {
-                                updateRoute(connectionString, routes[i], date);
-                                break;
-                            }
-                        }
-
-                        int index = -1;
-                        for (int i = 0; i < nodes.Count; i++)
-                        {
-                            if(nodes[i].Location == t.CurrentLocation)
-                            {
-                                index = i;
-                                break;
-                            }
-                        }
-                        foreach(Car c in t.Cars)
-                        {
-                            foreach(Passenger p in c.Passengers)
-                            {
-                                if(index != -1)
+                                if (routes[i].TrainID == t.TrainID && routes[i].ArrivalTime.Year == 2018)
                                 {
-                                    nodes[index].Passengers.Add(p);
-                                }
-                                else
-                                {
-                                    throw new System.ArgumentException("Missing or incorrect Location");
+                                    routes[i].SetArrivalTime(date);
+                                    updateRoute(connectionString, routes[i], date);
+                                    break;
                                 }
                             }
+                            foreach (Car c in t.Cars)
+                            {
+                                for(int j = 0; j < c.Passengers.Count; j++) 
+                                {
+                                    n.Passengers.Add(c.Passengers[j]);
+                                    c.Passengers.RemoveAt(j);
+                                }
+                            }
+                            t.InTransit = false;
                         }
-                        t.InTransit = false;
                     }
                 }
                 date = date.AddMinutes(1);

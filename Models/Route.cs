@@ -52,6 +52,7 @@ namespace TrainPopulation.Models
             DepartureLocation = departureLocation;
             ArrivalLocation = arrivalLocation;
             DepartureTime = departureTime;
+            ArrivalTime = new DateTimeOffset(2018, 1, 1, 0, 0, 0, new TimeSpan(0, 0, 0));
             Distance = distance;
         }
 
