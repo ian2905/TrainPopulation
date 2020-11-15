@@ -37,11 +37,11 @@ namespace TrainPopulation.Models
             int rando = rand.Next(0, 100);
             if(rando >= 97)
             {
-                Distance -= 2;
+                Distance -= 2 * (BaseSpeed/60);
             }
             else if(rando > 2)
             {
-                Distance--;
+                Distance -= (BaseSpeed/60);
             }
 
             if (Distance < 0)
