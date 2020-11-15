@@ -43,7 +43,7 @@ IF OBJECT_ID(N'Trains.CarType') IS NULL
 BEGIN
     CREATE TABLE Trains.CarType
     (
-        CarTypeID TINYINT NOT NULL IDENTITY(1, 1),
+        CarTypeID INT NOT NULL IDENTITY(1, 1),
         [Name] VARCHAR(32) NOT NULL,
 
         CONSTRAINT PK_Trains_CarType_CarTypeID PRIMARY KEY CLUSTERED
@@ -119,7 +119,7 @@ BEGIN
     (
         CarID INT NOT NULL IDENTITY(1, 1),
         TrainID INT NOT NULL,
-        CarTypeID TINYINT NOT NULL,
+        CarTypeID INT NOT NULL,
         TicketPrice INT NOT NULL,
         PassengerCapacity INT NOT NULL,
         CreatedOn DATETIMEOFFSET NOT NULL DEFAULT(SYSDATETIMEOFFSET()),
