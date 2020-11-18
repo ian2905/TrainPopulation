@@ -52,6 +52,13 @@ namespace TrainPopulation
 
             List<Node> nodes;
 
+            //Create tables, initilize static table
+            Sql sql = new Sql(connectionString);
+            sql.CreateSchema();
+            sql.DropTables();
+            sql.RecreateTables();
+            sql.InsertCarTypes();
+
             //Create train, car, and passenger tables
             trains = createTrains(connectionString);
             foreach(Train t in trains)
