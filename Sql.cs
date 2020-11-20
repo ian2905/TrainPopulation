@@ -21,11 +21,15 @@ namespace TrainPopulation
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                string sqlRequest = @"  IF NOT EXISTS   (SELECT name 
-                                                        FROM sys.schemas 
-                                                        WHERE name = N'Trains'
-                                                        )
-                                            EXEC('CREATE SCHEMA [Trains]');";
+                string sqlRequest = @"  IF NOT EXISTS
+                                            (
+                                                SELECT *
+                                                FROM sys.schemas s
+                                                WHERE s.[name] = N'Trains'
+                                            )
+                                        BEGIN
+                                            EXEC(N'CREATE SCHEMA [Trains] AUTHORIZATION [dbo]');
+                                        END;";
 
                 using (var command = new SqlCommand(sqlRequest, connection))
                 {
